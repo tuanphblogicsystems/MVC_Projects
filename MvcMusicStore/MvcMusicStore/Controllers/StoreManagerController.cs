@@ -18,7 +18,7 @@ namespace MvcMusicStore.Controllers
         public ActionResult Index()
         {
             //Remember compare album1 and ambum 2
-            var album2 = db.Albums; // load detail each abuml agame, bad peformance
+            List<Album> album2 = db.Albums.ToList(); // load detail each abuml agame, bad peformance
             var albums = db.Albums.Include(a => a.Artist).Include(a => a.Genre);
             return View(albums.ToList());
         }
