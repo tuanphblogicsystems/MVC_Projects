@@ -1,5 +1,6 @@
 namespace MvcMusicStore.Migrations
 {
+    using Models;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
@@ -9,7 +10,7 @@ namespace MvcMusicStore.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(MvcMusicStore.Models.MusicStoreDB context)
@@ -26,6 +27,11 @@ namespace MvcMusicStore.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
+            context.Artists.AddOrUpdate(c=>c.Name, new Artist { Name = "Al Di Meola" });
+            context.Genres.AddOrUpdate(new Genre { Name = "Jazz" });
+            context.Albums.AddOrUpdate(new Album { Artist = new Artist { Name = "Rush" }, Genre = new Genre { Name = "Rock" }, Price = 9.99m, Title = "Caravan" });
+            base.Seed(context);
+
         }
     }
 }

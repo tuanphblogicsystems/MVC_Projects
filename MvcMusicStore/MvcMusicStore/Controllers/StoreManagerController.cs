@@ -17,6 +17,8 @@ namespace MvcMusicStore.Controllers
         // GET: StoreManager
         public ActionResult Index()
         {
+            //Remember compare album1 and ambum 2
+            var album2 = db.Albums; // load detail each abuml agame, bad peformance
             var albums = db.Albums.Include(a => a.Artist).Include(a => a.Genre);
             return View(albums.ToList());
         }
@@ -75,6 +77,7 @@ namespace MvcMusicStore.Controllers
             {
                 return HttpNotFound();
             }
+            //get for user select Aritist,Genre for Album
             ViewBag.ArtistId = new SelectList(db.Artists, "ArtistId", "Name", album.ArtistId);
             ViewBag.GenreId = new SelectList(db.Genres, "GenreId", "Name", album.GenreId);
             return View(album);
